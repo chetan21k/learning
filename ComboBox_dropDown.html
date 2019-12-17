@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+       .wj-input-group-btn:last-child>.wj-btn{
+           border-left-width: 0 !important;
+       }
+       .wj-btn-default:hover {
+            background-color: rgba(255,255,255,0)!important;
+        }
+    </style>
+	<meta charset="utf-8" />
+    <link href="http://cdn.wijmo.com/5.20172.334/styles/wijmo.min.css" rel="stylesheet" />
+    <script src="http://cdn.wijmo.com/5.20172.334/controls/wijmo.min.js"></script>
+    <script src="http://cdn.wijmo.com/5.20172.334/controls/wijmo.input.min.js"></script>
+    <script>
+        var countries = 'US,UK,JAPAN,China'.split(',');
+        var data=[];
+        for(var i=0;i<10;i++){
+            data.push({
+                id:i,
+                country:countries[i%countries.length]
+            })
+
+        }
+        window.onload = function () {
+            var cvData= new wijmo.collections.CollectionView(data);
+            cvData.groupDescriptions.push( new wijmo.collections.PropertyGroupDescription('country'));
+            
+            var combo = new wijmo.input.AutoComplete('#inptCmbBx', {
+                itemsSource: cvData,
+                placeholder: 'Enter country',
+                displayMemberPath:'country',
+                isRequired: false,
+                selectedValue:null,
+               showDropDownButton:false,
+                gotFocus:function(s,e){
+                   s.showDropDownButton=true;                   
+                },           
+                lostFocus:function(s,e){
+                    s.showDropDownButton=false;
+                }
+            });
+                      
+
+         
+
+        }
+       
+    </script>
+</head>
+<body>
+   
+       
+       <div class=wj-custom>MMM</div>
+       <div id="inptCmbBx" ></div>
+     
+   
+</body>
+</html>
